@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: contabiliza-plus
+    runtime: python
+    plan: free
+    buildCommand: "echo 'Sem dependencias externas, nada a instalar.'"
+    startCommand: "python app.py"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

@@ -1,0 +1,47 @@
+CONTABILIZA PLUS - PUBLICAR NA WEB (Render, gratis)
+
+O que mudou no codigo:
+- app.py agora le HOST e PORT de variaveis de ambiente (necessario
+  em qualquer host na nuvem). Continua funcionando igual no seu PC.
+- desktop.py, ContabilizaPlus.spec e o .ico foram removidos porque
+  eram so para gerar o .exe desktop; nao servem para a web.
+
+PASSO A PASSO (Render.com)
+1. Crie uma conta gratuita em https://github.com (se ainda nao tiver)
+   e em https://render.com (pode entrar com a conta do GitHub).
+
+2. No GitHub, crie um repositorio novo (pode ser privado) e faca
+   upload desta pasta inteira (arraste os arquivos na propria
+   pagina do GitHub, em "Add file > Upload files").
+
+3. No Render, clique em "New +" > "Web Service" e conecte esse
+   repositorio.
+
+4. Preencha:
+   - Runtime: Python 3
+   - Build Command: (deixe vazio ou "echo ok")
+   - Start Command: python app.py
+   (o arquivo render.yaml ja tem isso configurado; se o Render
+   detectar o render.yaml automaticamente, os campos ja vem
+   preenchidos)
+
+5. Plano "Free" e clique em "Create Web Service". Em 1-2 minutos
+   o Render gera um link tipo:
+   https://contabiliza-plus.onrender.com
+
+6. Acesse esse link no navegador. Login: financeiro@empresa.com.br
+   Senha: Contabiliza@2026
+
+IMPORTANTE
+- Troque a senha de demonstracao antes de compartilhar o link com
+  outras pessoas (ela esta fixa no codigo, em init_db()).
+- No plano gratuito do Render, o servico "dorme" apos alguns
+  minutos sem uso e demora ~30s para acordar no proximo acesso.
+- O banco SQLite fica no disco do servidor. No plano gratuito esse
+  disco NAO e permanente: um novo deploy (ex. voce atualizar o
+  codigo) apaga os dados. Para dados realmente persistentes, use um
+  "Persistent Disk" do Render (pago) definindo a variavel de
+  ambiente DATA_DIR apontando para o disco montado, ou troque o
+  SQLite por um banco gerenciado (ex. Postgres do proprio Render).
+- Para rodar local, continua igual: "python app.py" abre em
+  http://127.0.0.1:8765
